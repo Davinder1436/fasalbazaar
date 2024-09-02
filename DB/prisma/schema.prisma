@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,130 +7,122 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Farmer {
-  id                Int         @id @default(autoincrement())
-  name              String
-  address           String
-  landSize          Float      
-  crops             Crop[]      
-  contracts         Contract[]
-  fulfilledContracts Int       
-  farmerScore       Float      
-  avatar            String?     
-  posts             Post[]    
-  messagesSent      Message[]   @relation("MessagesSent")  
-  messagesReceived  Message[]   @relation("MessagesReceived") 
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
+  id                  Int                 @id @default(autoincrement())
+  name                String
+  address             String
+  landSize            Float
+  crops               Crop[]
+  contracts           Contract[]
+  fulfilledContracts  Int
+  farmerScore         Float
+  avatar              String?
+  posts               Post[]
+  messagesSent        Message[]           @relation("FarmerMessagesSent")
+  messagesReceived    Message[]           @relation("FarmerMessagesReceived")
+  likes               Like[]              @relation("FarmerLikes")
+  scoreCalculations   ScoreCalculation[]  @relation("FarmerScoreCalculations")
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
 }
 
 model Contractor {
-  id                Int         @id @default(autoincrement())
-  name              String
-  address           String
-  contracts         Contract[]  
-  fulfilledContracts Int       
-  contractorScore   Float     
-  avatar            String?     
-  posts             Post[]      
-  messagesSent      Message[]   @relation("MessagesSent")  
-  messagesReceived  Message[]   @relation("MessagesReceived") 
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
+  id                  Int                 @id @default(autoincrement())
+  name                String
+  address             String
+  contracts           Contract[]
+  fulfilledContracts  Int
+  contractorScore     Float
+  avatar              String?
+  posts               Post[]
+  messagesSent        Message[]           @relation("ContractorMessagesSent")
+  messagesReceived    Message[]           @relation("ContractorMessagesReceived")
+  likes               Like[]              @relation("ContractorLikes")
+  scoreCalculations   ScoreCalculation[]  @relation("ContractorScoreCalculations")
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
 }
 
 model Crop {
-  id          Int        @id @default(autoincrement())
-  name        String
-  season      String   
-  farmers     Farmer[]   
-  contracts   Contract[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id         Int        @id @default(autoincrement())
+  name       String
+  season     String
+  farmers    Farmer[]
+  contracts  Contract[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
-
 
 model Contract {
-  id                Int        @id @default(autoincrement())
-  farmerId          Int
-  contractorId      Int
-  cropId            Int
-  landSize          Float      
-  amount            Float      
-  advancePayment    Float      
-  expectedYield     Float      
-  prefixedPrice     Float     
-  startDate         DateTime   
-  endDate           DateTime
-  insuranceFactors  String    
-  contractStatus    String    
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  id               Int        @id @default(autoincrement())
+  farmerId         Int
+  contractorId     Int
+  cropId           Int
+  landSize         Float
+  amount           Float
+  advancePayment   Float
+  expectedYield    Float
+  prefixedPrice    Float
+  startDate        DateTime
+  endDate          DateTime
+  insuranceFactors String
+  contractStatus   String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 
-
-  farmer            Farmer     @relation(fields: [farmerId], references: [id])
-  contractor        Contractor @relation(fields: [contractorId], references: [id])
-  crop              Crop       @relation(fields: [cropId], references: [id])
+  farmer           Farmer     @relation(fields: [farmerId], references: [id])
+  contractor       Contractor @relation(fields: [contractorId], references: [id])
+  crop             Crop       @relation(fields: [cropId], references: [id])
 }
-
 
 model ScoreCalculation {
-  id                Int        @id @default(autoincrement())
-  farmerId          Int
-  contractorId      Int
-  score             Float
-  calculationDate   DateTime   @default(now())
-  criteria          String     
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  id               Int        @id @default(autoincrement())
+  farmerId         Int?
+  contractorId     Int?
+  score            Float
+  calculationDate  DateTime   @default(now())
+  criteria         String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 
-
-  farmer            Farmer?    @relation(fields: [farmerId], references: [id])
-  contractor        Contractor? @relation(fields: [contractorId], references: [id])
+  farmer           Farmer?    @relation("FarmerScoreCalculations", fields: [farmerId], references: [id])
+  contractor       Contractor? @relation("ContractorScoreCalculations", fields: [contractorId], references: [id])
 }
-
 
 model Message {
-  id                Int        @id @default(autoincrement())
-  content           String
-  senderId          Int        // Sender can be either a farmer or contractor
-  receiverId        Int        // Receiver can be either a farmer or contractor
-  createdAt         DateTime   @default(now())
+  id                 Int        @id @default(autoincrement())
+  content            String
+  senderId           Int        // Sender can be either a farmer or contractor
+  receiverId         Int        // Receiver can be either a farmer or contractor
+  createdAt          DateTime   @default(now())
 
-
-  sender            Farmer?    @relation("MessagesSent", fields: [senderId], references: [id])
-  receiver          Farmer?    @relation("MessagesReceived", fields: [receiverId], references: [id])
-  senderContractor  Contractor? @relation("MessagesSent", fields: [senderId], references: [id])
-  receiverContractor Contractor? @relation("MessagesReceived", fields: [receiverId], references: [id])
+  senderFarmer       Farmer?    @relation("FarmerMessagesSent", fields: [senderId], references: [id], onDelete: Cascade, map: "Message_FarmerSenderId_fkey")
+  receiverFarmer     Farmer?    @relation("FarmerMessagesReceived", fields: [receiverId], references: [id], onDelete: Cascade, map: "Message_FarmerReceiverId_fkey")
+  senderContractor   Contractor? @relation("ContractorMessagesSent", fields: [senderId], references: [id], onDelete: Cascade, map: "Message_ContractorSenderId_fkey")
+  receiverContractor Contractor? @relation("ContractorMessagesReceived", fields: [receiverId], references: [id], onDelete: Cascade, map: "Message_ContractorReceiverId_fkey")
 }
-
 
 model Post {
-  id                Int    
-  content           String
-  imageUrl          String?  
-  farmerId          Int?
-  contractorId      Int?
-  likes             Like[]    
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  id          Int   @id @default(autoincrement())
+  content     String
+  imageUrl    String?
+  farmerId    Int?
+  contractorId Int?
+  likes       Like[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  
-  farmer            Farmer?    @relation(fields: [farmerId], references: [id])
-  contractor        Contractor? @relation(fields: [contractorId], references: [id])
+  farmer      Farmer?    @relation(fields: [farmerId], references: [id])
+  contractor  Contractor? @relation(fields: [contractorId], references: [id])
 }
-
 
 model Like {
-  id                Int        @id @default(autoincrement())
-  postId            Int
-  userId            Int        // Can be a farmer or a contractor
-  createdAt         DateTime   @default(now())
+  id         Int        @id @default(autoincrement())
+  postId     Int
+  userId     Int        // Can be a farmer or a contractor
+  createdAt  DateTime   @default(now())
 
-
-  post              Post       @relation(fields: [postId], references: [id])
-  farmer            Farmer?    @relation(fields: [userId], references: [id])
-  contractor        Contractor? @relation(fields: [userId], references: [id])
+  post       Post       @relation(fields: [postId], references: [id])
+  farmer     Farmer?    @relation("FarmerLikes", fields: [userId], references: [id], onDelete: Cascade, map: "Like_Farmer_userId_fkey")
+  contractor Contractor? @relation("ContractorLikes", fields: [userId], references: [id], onDelete: Cascade, map: "Like_Contractor_userId_fkey")
 }
-

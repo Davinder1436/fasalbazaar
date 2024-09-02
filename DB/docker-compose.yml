@@ -1,0 +1,18 @@
+
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-fasalbazar
+    environment:
+      POSTGRES_USER: fasalbazar
+      POSTGRES_PASSWORD: fasal123
+      POSTGRES_DB: fasalbazar_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local
