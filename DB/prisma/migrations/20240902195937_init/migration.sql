@@ -3,6 +3,8 @@ CREATE TABLE "Farmer" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "address" TEXT NOT NULL,
+    "contactNo" TEXT NOT NULL,
+    "email" TEXT,
     "landSize" DOUBLE PRECISION NOT NULL,
     "fulfilledContracts" INTEGER NOT NULL,
     "farmerScore" DOUBLE PRECISION NOT NULL,
@@ -17,6 +19,8 @@ CREATE TABLE "Farmer" (
 CREATE TABLE "Contractor" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "contactNo" TEXT NOT NULL,
+    "email" TEXT,
     "address" TEXT NOT NULL,
     "fulfilledContracts" INTEGER NOT NULL,
     "contractorScore" DOUBLE PRECISION NOT NULL,
@@ -108,16 +112,16 @@ CREATE TABLE "Like" (
 );
 
 -- CreateTable
-CREATE TABLE "_CropToFarmer" (
+CREATE TABLE "_FarmerCrops" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_CropToFarmer_AB_unique" ON "_CropToFarmer"("A", "B");
+CREATE UNIQUE INDEX "_FarmerCrops_AB_unique" ON "_FarmerCrops"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_CropToFarmer_B_index" ON "_CropToFarmer"("B");
+CREATE INDEX "_FarmerCrops_B_index" ON "_FarmerCrops"("B");
 
 -- AddForeignKey
 ALTER TABLE "Contract" ADD CONSTRAINT "Contract_farmerId_fkey" FOREIGN KEY ("farmerId") REFERENCES "Farmer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -162,7 +166,7 @@ ALTER TABLE "Like" ADD CONSTRAINT "Like_Farmer_userId_fkey" FOREIGN KEY ("userId
 ALTER TABLE "Like" ADD CONSTRAINT "Like_Contractor_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Contractor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CropToFarmer" ADD CONSTRAINT "_CropToFarmer_A_fkey" FOREIGN KEY ("A") REFERENCES "Crop"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_FarmerCrops" ADD CONSTRAINT "_FarmerCrops_A_fkey" FOREIGN KEY ("A") REFERENCES "Crop"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CropToFarmer" ADD CONSTRAINT "_CropToFarmer_B_fkey" FOREIGN KEY ("B") REFERENCES "Farmer"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_FarmerCrops" ADD CONSTRAINT "_FarmerCrops_B_fkey" FOREIGN KEY ("B") REFERENCES "Farmer"("id") ON DELETE CASCADE ON UPDATE CASCADE;

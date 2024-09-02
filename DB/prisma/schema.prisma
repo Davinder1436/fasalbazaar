@@ -11,8 +11,10 @@ model Farmer {
   id                  Int                 @id @default(autoincrement())
   name                String
   address             String
+  contactNo           String
+  email               String?
   landSize            Float
-  crops               Crop[]
+  crops               Crop[]              @relation("FarmerCrops")
   contracts           Contract[]
   fulfilledContracts  Int
   farmerScore         Float
@@ -29,6 +31,8 @@ model Farmer {
 model Contractor {
   id                  Int                 @id @default(autoincrement())
   name                String
+  contactNo           String
+  email               String?
   address             String
   contracts           Contract[]
   fulfilledContracts  Int
@@ -47,7 +51,7 @@ model Crop {
   id         Int        @id @default(autoincrement())
   name       String
   season     String
-  farmers    Farmer[]
+  farmers    Farmer[]   @relation("FarmerCrops")
   contracts  Contract[]
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
@@ -92,8 +96,8 @@ model ScoreCalculation {
 model Message {
   id                 Int        @id @default(autoincrement())
   content            String
-  senderId           Int        // Sender can be either a farmer or contractor
-  receiverId         Int        // Receiver can be either a farmer or contractor
+  senderId           Int
+  receiverId         Int
   createdAt          DateTime   @default(now())
 
   senderFarmer       Farmer?    @relation("FarmerMessagesSent", fields: [senderId], references: [id], onDelete: Cascade, map: "Message_FarmerSenderId_fkey")
