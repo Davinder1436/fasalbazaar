@@ -1,5 +1,5 @@
 import React from "react";
-import Wheat from "../assets/wheat.jpg";
+import Wheat from "../assets/wheat.jpg"; // Ensure the path to the image is correct
 
 const Footer = () => {
   return (
@@ -8,13 +8,13 @@ const Footer = () => {
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <a
-              href="https://flowbite.com/"
+              href="#"
               className="flex items-center mb-4 sm:mb-0 space-x-3"
             >
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={Wheat} // Using the imported image here
                 className="h-8"
-                alt="Flowbite Logo"
+                alt="FarmBazar Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-800">
                 FarmBazar
@@ -46,7 +46,7 @@ const Footer = () => {
           <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
           <span className="block text-sm text-gray-600 sm:text-center">
             © 2024{" "}
-            <a href="" className="hover:underline">
+            <a href="#" className="hover:underline">
               FarmBazar™
             </a>
             . All Rights Reserved.
