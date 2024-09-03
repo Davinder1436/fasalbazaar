@@ -1,12 +1,11 @@
-// routes/farmerRoutes.ts
-import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
-import {  FarmerRegistrationRequest} from '../types/farmers';
 
-const prisma = new PrismaClient();
+import { Router } from 'express';
+
+import {  FarmerRegistrationRequest} from '../types/farmers';
+import prisma from './../lib/db'
+
 const router = Router();
 
-// Register a new farmer
 router.post('/register', async (req, res) => {
   const { name, address, landSize, crops , phone , email, avatarURL} = req.body as FarmerRegistrationRequest;
 
