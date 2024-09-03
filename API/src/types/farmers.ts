@@ -5,8 +5,9 @@ export interface FarmerRegistrationRequest {
     address: string;
     landSize: number;
     crops: string[];  // Array of Crop IDs that the farmer is interested in
-    phone?: string;
+    phone: string;
     email?: string;
+    avatarURL:string;
 }
 
  export  interface FarmerProfileUpdateRequest {

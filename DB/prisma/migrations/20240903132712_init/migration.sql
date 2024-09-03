@@ -1,3 +1,9 @@
+-- CreateEnum
+CREATE TYPE "cropSeason" AS ENUM ('RABI', 'KHARIF', 'YEARLY');
+
+-- CreateEnum
+CREATE TYPE "cropStatus" AS ENUM ('SIGNED', 'SOWN', 'GREEN', 'MATURE', 'HARVESTED');
+
 -- CreateTable
 CREATE TABLE "Farmer" (
     "id" SERIAL NOT NULL,
@@ -5,9 +11,9 @@ CREATE TABLE "Farmer" (
     "address" TEXT NOT NULL,
     "contactNo" TEXT NOT NULL,
     "email" TEXT,
-    "landSize" DOUBLE PRECISION NOT NULL,
-    "fulfilledContracts" INTEGER NOT NULL,
-    "farmerScore" DOUBLE PRECISION NOT NULL,
+    "landSize" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "fulfilledContracts" INTEGER NOT NULL DEFAULT 0,
+    "farmerScore" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "avatar" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -22,8 +28,8 @@ CREATE TABLE "Contractor" (
     "contactNo" TEXT NOT NULL,
     "email" TEXT,
     "address" TEXT NOT NULL,
-    "fulfilledContracts" INTEGER NOT NULL,
-    "contractorScore" DOUBLE PRECISION NOT NULL,
+    "fulfilledContracts" INTEGER NOT NULL DEFAULT 0,
+    "contractorScore" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "avatar" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -56,6 +62,7 @@ CREATE TABLE "Contract" (
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
     "insuranceFactors" TEXT NOT NULL,
+    "status" "cropStatus" NOT NULL DEFAULT 'SIGNED',
     "contractStatus" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

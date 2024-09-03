@@ -13,12 +13,12 @@ model Farmer {
   address             String
   contactNo           String
   email               String?
-  landSize            Float
+  landSize            Float               @default(0)
   crops               Crop[]              @relation("FarmerCrops")
   contracts           Contract[]
-  fulfilledContracts  Int
-  farmerScore         Float
-  avatar              String?
+  fulfilledContracts  Int                 @default(0)
+  farmerScore         Float               @default(0)
+  avatar              String?             
   posts               Post[]
   messagesSent        Message[]           @relation("FarmerMessagesSent")
   messagesReceived    Message[]           @relation("FarmerMessagesReceived")
@@ -35,8 +35,8 @@ model Contractor {
   email               String?
   address             String
   contracts           Contract[]
-  fulfilledContracts  Int
-  contractorScore     Float
+  fulfilledContracts  Int                 @default(0)
+  contractorScore     Float               @default(0)
   avatar              String?
   posts               Post[]
   messagesSent        Message[]           @relation("ContractorMessagesSent")
@@ -46,15 +46,28 @@ model Contractor {
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
 }
+enum cropSeason{
+  RABI
+  KHARIF
+  YEARLY
+}
 
 model Crop {
   id         Int        @id @default(autoincrement())
-  name       String
-  season     String
+  name       String     
+  season     cropSeason 
   farmers    Farmer[]   @relation("FarmerCrops")
   contracts  Contract[]
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+}
+
+enum cropStatus{
+  SIGNED
+  SOWN
+  GREEN
+  MATURE
+  HARVESTED
 }
 
 model Contract {
@@ -70,6 +83,7 @@ model Contract {
   startDate        DateTime
   endDate          DateTime
   insuranceFactors String
+  status            cropStatus @default(SIGNED)
   contractStatus   String
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
