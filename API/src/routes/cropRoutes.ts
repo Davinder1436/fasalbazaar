@@ -4,10 +4,20 @@ import prisma from './../lib/db';
 
 const router = Router();
 
+router.get('/',async(req,res)=>{
+
+  try{
+    const crops = await prisma.crop.findMany()
+    res.status(200).json(crops)
+  }catch (error:any) {
+    console.log(error)
+    res.status(500).json({ "error": error.message });
+  }
+
+})
+
 router.post("/add", async (req, res) => {
   try {
-   
-
     const { name, season }: CropRequest = req.body;
 
     const seasons={
