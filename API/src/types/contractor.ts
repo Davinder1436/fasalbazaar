@@ -1,8 +1,9 @@
 export interface ContractorRegistrationRequest {
   name: string;
   address: string;
-  phone?: string;
+  phone: string;
   email?: string;
+  avatarURL?:string;
 }
 
 export interface ContractorProfileUpdateRequest {

@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "name": "Wheat",
+      "season": "Rabi"
+    },
+    {
+      "id": 2,
+      "name": "Paddy",
+      "season": "Kharif"
+    },
+    {
+      "id": 3,
+      "name": "Potato",
+      "season": "Rabi"
+    },
+    {
+      "id": 4,
+      "name": "Corn",
+      "season": "Kharif"
+    },
+    {
+      "id": 5,
+      "name": "Soybean",
+      "season": "Kharif"
+    },
+    {
+      "id": 6,
+      "name": "Barley",
+      "season": "Rabi"
+    },
+    {
+      "id": 7,
+      "name": "Mustard",
+      "season": "Rabi"
+    },
+    {
+      "id": 8,
+      "name": "Sugarcane",
+      "season": "Kharif"
+    },
+    {
+      "id": 9,
+      "name": "Groundnut",
+      "season": "Kharif"
+    },
+    {
+      "id": 10,
+      "name": "Chickpea",
+      "season": "Rabi"
+    }
+  ]
+  

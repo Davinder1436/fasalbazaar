@@ -1,5 +1,10 @@
-export interface Crop {
-    id: number;
+export enum cropSeason{
+  RABI,
+  KHARIF,
+  YEARLY
+}
+
+export interface CropRequest {
     name: string;
-    season: string;
-  }
+    season: cropSeason;
+}
