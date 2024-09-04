@@ -8,24 +8,10 @@ import {
   FarmerUpdateSchema,
   LoginSchema,
 } from "./schema";
-import { z } from "zod";
-import { Request, Response, NextFunction } from "express";
+import { validateRequest } from "../utils";
 
 const router = Router();
 
-const validateRequest =
-  (schema: z.ZodTypeAny) =>
-  (req: Request, res: Response, next: NextFunction) => {
-    try {
-      schema.parse(req.body);
-      next();
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ errors: error.errors });
-      }
-      next(error);
-    }
-  };
 router.get("/", async (req, res) => {
   try {
     const farmers = await prisma.farmer.findMany();
