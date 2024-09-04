@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   // url      = env("DATABASE_URL") 
+  
   url = "postgresql://fasalbazar:fasal123@localhost:5432/fasalbazar_db"
 }
 
