@@ -6,7 +6,9 @@ export interface FarmerRegistrationRequest {
     phone: string;
     email?: string;
     avatarURL?:string;
+    password:string;
 }
+
 
  export  interface FarmerProfileUpdateRequest {
     name?: string;

@@ -5,6 +5,7 @@ import prisma from './../lib/db';
 const router = Router();
 
 router.get('/',async(req,res)=>{
+  
 
   try{
     const crops = await prisma.crop.findMany()

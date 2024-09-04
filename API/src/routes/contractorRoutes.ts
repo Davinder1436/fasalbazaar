@@ -1,41 +1,51 @@
-
 import { Router } from 'express';
-import {  ContractorRegistrationRequest} from '../types/contractor';
-import prisma from './../lib/db'
+import bcrypt from 'bcrypt';
+import prisma from './../lib/db';
+import generateToken from '../utils/jwtUtil'; // Assuming you have a utility for generating JWTs
+import { ContractorRegistrationRequest } from '../types/contractor';
 
 const router = Router();
-router.get('/',async(req,res)=>{
 
-    try{
-      const contractors = await prisma.contractor.findMany()
-      res.status(200).json(contractors)
-    }catch (error:any) {
-      console.log(error)
-      res.status(500).json({ "error": error.message });
-    }
-  
-  });
-
-router.post('/register', async (req, res) => {
-  const { name, address, phone , email, avatarURL} = req.body as ContractorRegistrationRequest;
-  
+router.get('/', async (req, res) => {
   try {
-    const newContractor = await prisma.contractor.create({
-      data: {
-        name:name,
-        address:address,
-        contactNo:phone,
-        email:email,
-        avatar:avatarURL
-      },
-    });
-
-    res.status(201).json(newContractor);
-  } catch (error:any) {
-    console.log(error)
+    const contractors = await prisma.contractor.findMany();
+    res.status(200).json(contractors);
+  } catch (error: any) {
+    console.log(error);
     res.status(500).json({ "error": error.message });
   }
 });
 
+router.post('/register', async (req, res) => {
+  const { name, address, phone, email, avatarURL, password } = req.body as ContractorRegistrationRequest;
+
+  if (!password) {
+    return res.status(400).json({ error: 'Password is required' });
+  }
+
+  try {
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newContractor = await prisma.contractor.create({
+      data: {
+        name: name,
+        address: address,
+        contactNo: phone,
+        email: email,
+        avatar: avatarURL,
+        password: hashedPassword, 
+      },
+    });
+
+    
+    const token = generateToken(newContractor.id);
+
+    res.status(201).json({ contractor: newContractor, token });
+  } catch (error: any) {
+    console.log(error);
+    res.status(500).json({ "error": error.message });
+  }
+});
 
 export default router;

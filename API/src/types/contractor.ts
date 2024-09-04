@@ -4,6 +4,7 @@ export interface ContractorRegistrationRequest {
   phone: string;
   email?: string;
   avatarURL?:string;
+  password:string;
 }
 
 export interface ContractorProfileUpdateRequest {
@@ -13,4 +14,3 @@ export interface ContractorProfileUpdateRequest {
     phone?: string;
     email?: string;
 }
-
