@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +16,11 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    navigate('/register');
+  };
 
   return (
     <nav
@@ -62,10 +69,11 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#contact"
+            href="#register"
+            onClick={handleRegisterClick}
             className="block md:inline-block text-white bg-black py-2 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300"
           >
-            Contact
+            Register
           </a>
         </div>
       </div>
