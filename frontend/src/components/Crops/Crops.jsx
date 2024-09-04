@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CropCard from "./CropCard";
 import Wheat from "../../assets/wheat.jpg";
 
-const CROPS_PER_PAGE = 8;
+const CROPS_PER_PAGE = 4; // Updated to load 4 crops initially
 
 const Crops = () => {
   const [visibleCrops, setVisibleCrops] = useState(CROPS_PER_PAGE);
@@ -18,7 +18,7 @@ const Crops = () => {
     { id: 7, name: "Potatoes", image: Wheat },
     { id: 8, name: "Tomatoes", image: Wheat },
     { id: 9, name: "Carrots", image: Wheat },
-    { id: 10, name: "Lettuce", image: Wheat},
+    { id: 10, name: "Lettuce", image: Wheat },
   ];
 
   const loadMore = () => {
