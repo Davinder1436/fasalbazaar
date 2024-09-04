@@ -5,7 +5,7 @@ import Crops from "./components/Crops/Crops"
 import Solutions from "./components/Solutions/Solutions"
 import Footer from "./footer/Footer"
 
-export default function App() {
+const App =() =>{
   return (
     <>
     <Navbar />
@@ -17,3 +17,5 @@ export default function App() {
     </>
   )
 }
+
+export default App;
