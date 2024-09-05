@@ -12,7 +12,11 @@ const FarmerRegistrationSchema = z.object({
     /^[a-zA-Z\s]+,\s*[a-zA-Z\s]+,\s*[a-zA-Z\s]+,\s*\d{6}$/,
     { message: "Address must be in the format 'village/city, district, state, pincode' with a 6-digit pincode" }
   ),
+<<<<<<< HEAD
     email: z.string().email({ message: "Invalid email address" }),
+=======
+  email: z.string().email({ message: "Invalid email address" }),
+>>>>>>> main
   phone: z.string().regex(/^[0-9]{10}$/, {
     message: "Phone number must be a 10-digit number",
   }),
