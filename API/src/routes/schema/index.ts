@@ -6,9 +6,13 @@ const FarmerRegistrationSchema = z.object({
     .min(1)
     .refine((val) => val.trim().length > 0, { message: "Name is required" }),
   address: z
-    .string()
-    .min(10, { message: "Address must be at least 10 characters long" }),
-  email: z.string().email({ message: "Invalid email address" }),
+  .string()
+  .min(10, { message: "Address must be at least 10 characters long" })
+  .regex(
+    /^[a-zA-Z\s]+,\s*[a-zA-Z\s]+,\s*[a-zA-Z\s]+,\s*\d{6}$/,
+    { message: "Address must be in the format 'village/city, district, state, pincode' with a 6-digit pincode" }
+  ),
+    email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().regex(/^[0-9]{10}$/, {
     message: "Phone number must be a 10-digit number",
   }),

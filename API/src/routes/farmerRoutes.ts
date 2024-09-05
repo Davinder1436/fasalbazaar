@@ -8,7 +8,7 @@ import {
   FarmerUpdateSchema,
   LoginSchema,
 } from "./schema";
-import { validateRequest } from "../utils";
+import { validateRequest } from "../utils/zodutils";
 
 const router = Router();
 
