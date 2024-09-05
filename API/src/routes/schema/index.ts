@@ -17,8 +17,7 @@ const FarmerRegistrationSchema = z.object({
     message: "Phone number must be a 10-digit number",
   }),
   avatarURL: z
-    .string()
-    .url({ message: "Avatar URL must be a valid URL" })
+    .string().url()
     .optional(),
   password: z
     .string()
