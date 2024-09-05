@@ -1,7 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import prisma from "./../lib/db";
-import generateToken from "../utils/jwtUtil"; // Assuming you have a utility for generating JWTs
+import generateToken from "../utils/jwtUtil";
 import { ContractorRegistrationRequest } from "../types/contractor";
 import { validateRequest } from "../utils/zodutils";
 import { ContractorRegistrationSchema } from "./schema";
