@@ -3,20 +3,36 @@
 export interface FarmerRegistrationRequest {
     name: string;
     address: string;
-    landSize: number;
-    crops: string[];  // Array of Crop IDs that the farmer is interested in
-    phone?: string;
+    phone: string;
     email?: string;
+    avatarURL?:string;
+    password:string;
 }
+
+export interface AddCropsRequest{
+    crops: {
+        cropId:number,
+        crop:string,
+        quantityRange:number,
+        landsize:number,
+    };
+    farmerId: number;
+}
+
 
  export  interface FarmerProfileUpdateRequest {
     name?: string;
     address?: string;
     landSize?: number;
-    avatar?: string; // URL of the new avatar image
-    crops?: string[]; // Array of Crop IDs that the farmer wants to update
+    avatar?: string; 
+    crops?: string[]; 
     phone?: string;
     email?: string;
+}
+
+export interface AddCropRequest{
+    cropNames : string[];
+    farmerId: number;
 }
 
   
