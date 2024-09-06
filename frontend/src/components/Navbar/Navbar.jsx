@@ -52,6 +52,19 @@ const Navbar = () => {
             />
           </svg>
         </button>
+        {/* Search Bar */}
+        <div className="hidden md:flex items-center ms-64 w-1/3 relative">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full py-2 pl-10 pr-4 rounded-3xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black transition-all duration-300"
+          />
+          <img
+            src="../src/assets/search.png" // Update this with your actual image path
+            alt="Search Icon"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
+          />
+        </div>
         <div
           className={`md:flex md:items-center md:space-x-6 absolute md:static w-full md:w-auto bg-white md:bg-transparent top-full left-0 md:top-auto transition-all duration-300 ease-in-out ${
             isOpen
