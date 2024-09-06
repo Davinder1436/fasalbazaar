@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import mainHomeImage from '../../assets/mainHome.png'; // Adjust the path based on your folder structure
 import placeholderImage from '../../assets/placeholder1.avif'; // Replace with your image path
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -34,11 +33,9 @@ const Home = () => {
             <p className="text-gray-200 text-lg sm:text-xl mb-6">
               Explore sustainable farming practices and innovative agricultural solutions.
             </p>
-            <Link to="/register">
-              <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-                Register
-              </button>
-            </Link>
+            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+              Learn More
+            </button>
           </div>
           
           {/* Image Container */}

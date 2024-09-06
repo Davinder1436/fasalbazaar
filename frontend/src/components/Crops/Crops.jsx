@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CropCard from "./CropCard";
 import Wheat from "../../assets/wheat.jpg";
 
-const CROPS_PER_PAGE = 4; // Updated to load 4 crops initially
+const CROPS_PER_PAGE = 8;
 
 const Crops = () => {
   const [visibleCrops, setVisibleCrops] = useState(CROPS_PER_PAGE);
@@ -18,7 +18,7 @@ const Crops = () => {
     { id: 7, name: "Potatoes", image: Wheat },
     { id: 8, name: "Tomatoes", image: Wheat },
     { id: 9, name: "Carrots", image: Wheat },
-    { id: 10, name: "Lettuce", image: Wheat },
+    { id: 10, name: "Lettuce", image: Wheat},
   ];
 
   const loadMore = () => {
@@ -28,10 +28,10 @@ const Crops = () => {
   return (
     <div className="p-4 sm:p-6 md:p-8">
       {/* Heading */}
-      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-10 mt-8 sm:mb-8">Crops</h2>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-6 sm:mb-8">Crops</h2>
       
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {allCrops.slice(0, visibleCrops).map(crop => (
           <CropCard key={crop.id} name={crop.name} image={crop.image} />
         ))}
