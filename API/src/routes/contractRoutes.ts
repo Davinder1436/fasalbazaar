@@ -14,7 +14,7 @@ router.post('/create', async (req, res) => {
     advancePayment,
     expectedYield,
     prefixedPrice,
-    startDate,
+    startDate, 
     endDate,
     insuranceFactors,
   }: CreateContractRequest = req.body;
@@ -32,7 +32,7 @@ router.post('/create', async (req, res) => {
         prefixedPrice,
         startDate: new Date(startDate),
         endDate: new Date(endDate),
-        insuranceFactors,
+        insuranceFactors: JSON.stringify(insuranceFactors),
         status: 'SIGNED', // Assuming default status is SIGNED
         contractStatus: 'Active',
       },
