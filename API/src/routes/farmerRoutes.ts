@@ -107,7 +107,7 @@ router.post("/login", validateRequest(LoginSchema), async (req, res) => {
 
 router.put('/addCrop', async (req, res) => {
   const { farmerId, cropNames } = req.body as AddCropRequest; 
-
+  
   try {
     
     const crops = await prisma.crop.findMany({
