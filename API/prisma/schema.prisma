@@ -149,3 +149,5 @@ model Like {
   farmer     Farmer?    @relation("FarmerLikes", fields: [userId], references: [id], onDelete: Cascade, map: "Like_Farmer_userId_fkey")
   contractor Contractor? @relation("ContractorLikes", fields: [userId], references: [id], onDelete: Cascade, map: "Like_Contractor_userId_fkey")
 }
+
+

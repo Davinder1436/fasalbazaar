@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { FarmerRegistrationRequest } from "../types/farmers";
+import { AddCropRequest, FarmerRegistrationRequest } from "../types/farmers";
 import prisma from "./../lib/db";
 import bcrypt from "bcrypt";
 import generateToken from "../utils/jwtUtil";
@@ -8,7 +8,7 @@ import {
   FarmerUpdateSchema,
   LoginSchema,
 } from "./schema";
-import { validateRequest } from "../utils";
+import { validateRequest } from "../utils/zodutils";
 
 const router = Router();
 
@@ -104,5 +104,43 @@ router.post("/login", validateRequest(LoginSchema), async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.put('/addCrop', async (req, res) => {
+  const { farmerId, cropNames } = req.body as AddCropRequest; 
+
+  try {
+    
+    const crops = await prisma.crop.findMany({
+      where: {
+        name: { in: cropNames }
+      },
+      select: {
+        id: true
+      }
+    });
+
+    if (crops.length === 0) {
+      return res.status(404).json({ error: "No crops found with the provided names" });
+    }
+
+   
+    const updatedFarmer = await prisma.farmer.update({
+      where: { id: farmerId },
+      data: {
+        crops: {
+          connect: crops.map(crop => ({ id: crop.id }))
+        }
+      },
+      include: { crops: true }  
+    });
+
+    res.status(200).json(updatedFarmer);
+  } catch (error: any) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 export default router;
