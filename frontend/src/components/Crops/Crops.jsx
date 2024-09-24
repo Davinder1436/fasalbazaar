@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import CropCard from "./CropCard";
 import Wheat from "../../assets/wheat.jpg";
+import Corn from "../../assets/corn.jpg";
+import Rice from "../../assets/rice.jpg";
+import Barley from "../../assets/Barley.jpg";
+import Oats from "../../assets/oats.jpg";
+import Soybeans from "../../assets/soyabean.jpg";
+import Potatoes from "../../assets/potatoes.jpg";
+import Tomatoes from "../../assets/tomatoes.jpg";
+import Carrots from "../../assets/carrots.jpg";
+import Lettuce from "../../assets/Lettuce.jpg";
 
 const CROPS_PER_PAGE = 4; // Updated to load 4 crops initially
 
@@ -10,15 +19,15 @@ const Crops = () => {
   // Mock data - replace with actual data fetching logic
   const allCrops = [
     { id: 1, name: "Wheat", image: Wheat },
-    { id: 2, name: "Corn", image: Wheat },
-    { id: 3, name: "Rice", image: Wheat },
-    { id: 4, name: "Barley", image: Wheat },
-    { id: 5, name: "Oats", image: Wheat },
-    { id: 6, name: "Soybeans", image: Wheat },
-    { id: 7, name: "Potatoes", image: Wheat },
-    { id: 8, name: "Tomatoes", image: Wheat },
-    { id: 9, name: "Carrots", image: Wheat },
-    { id: 10, name: "Lettuce", image: Wheat },
+    { id: 2, name: "Corn", image: Corn },
+    { id: 3, name: "Rice", image: Rice },
+    { id: 4, name: "Barley", image: Barley },
+    { id: 5, name: "Oats", image: Oats },
+    { id: 6, name: "Soybeans", image: Soybeans },
+    { id: 7, name: "Potatoes", image: Potatoes },
+    { id: 8, name: "Tomatoes", image: Tomatoes},
+    { id: 9, name: "Carrots", image: Carrots },
+    { id: 10, name: "Lettuce", image: Lettuce },
   ];
 
   const loadMore = () => {

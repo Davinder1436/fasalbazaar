@@ -6,6 +6,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import Wheat from '../../assets/wheat.jpg';
+import Corn from "../../assets/corn.jpg";
+import Rice from "../../assets/rice.jpg";
 
 const Solutions = () => {
   const slides = [
@@ -17,12 +19,12 @@ const Solutions = () => {
     {
       title: "Rice Processing",
       description: "Our rice processing solutions ensure efficient production, maintaining the nutritional value of rice while improving yield.",
-      image: Wheat,
+      image: Rice,
     },
     {
       title: "Corn Milling",
       description: "From corn milling to starch production, our solutions help deliver high-quality corn products with advanced processing technologies.",
-      image: Wheat,
+      image: Corn,
     },
   ];
 

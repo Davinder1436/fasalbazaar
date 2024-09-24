@@ -34,7 +34,7 @@ const Home = () => {
               Explore sustainable farming practices and innovative agricultural solutions.
             </p>
             <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Register
+              Learn More
             </button>
           </div>
           
