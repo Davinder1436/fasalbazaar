@@ -1,8 +1,8 @@
 const accountSid = "";
 const authToken = "";
 const client = require("twilio")(accountSid, authToken);
-
-const sendMessage = async (req, res) => {
+import { Request, Response } from "express";
+export const sendMessage = async (req: Request, res: Response) => {
   try {
     const message = await client.messages.create({
       body: req.body.message,
